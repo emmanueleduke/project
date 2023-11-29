@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Page</title>
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body>
+    <h1>Survey Page</h1>
+
+    {% for survey in surveys %}
+        <div>
+            <h2>{{ survey.title }}</h2>
+            <p>{{ survey.description }}</p>
+        </div>
+    {% endfor %}
+
+    <h2>Survey or Quiz Questions</h2>
+    <form method="post" action="{{ url_for('survey') }}">
+        {% for question in questions %}
+            <fieldset>
+                <legend>{{ question.question }}</legend>
+                {% for choice in question.choices %}
+                    <label>
+                        <input type="radio" name="question_{{ question.question }}" value="{{ choice }}">
+                        {{ choice }}
+                    </label><br>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+        <button type="submit">Submit Survey</button>
+    </form>
+</body>
+</html>
+
