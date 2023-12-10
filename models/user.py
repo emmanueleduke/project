@@ -1,11 +1,20 @@
-from models.storage.db_storage import Base
-import sqlalchemy
-from sqlalchemy import Column, String, ForeignKey, Boolean, Integer
+import models
+from hashlib import md5
+from models.base import Base, BaseModel
+from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
 
-class User(Base):
+class User(BaseModel, Base):
     __tablename__ = 'users'
-    id = Column('id', Integer, primary_key=True, nullable=False)
-    email = Column('email', String, nullable=False)
-    password = Column('password', String, nullable=False)
+    email = Column('email', String(60), nullable=False, unique=True)
+    password = Column('password', String(60), nullable=False)
     creator = Column('creator', Boolean, default=False)
+
+    def __init__(self, **kwargs):
+        """Create the instance"""
+        super().__init__(**kwargs)
+
+    def __setattr__(self, __name, __value):
+        if __name == "password":
+            __value = md5(__value.encode()).hexdigest()
+        super().__setattr__(__name, __value)
