@@ -1,6 +1,8 @@
 import json
+import os
 
-filename = '/home/iyanu/Documents/SurveyApp/project/models/id.json' 
+path = f'{os.getcwd()}/models/'
+filename = f'{path}id.json' 
 
 with open(filename, 'r') as f:
     index = json.load(f)
@@ -37,3 +39,5 @@ def getRID():
     with open(filename, 'w') as wfile:
         json.dump(index, wfile, indent=2)
     return id
+
+print(getRID())
