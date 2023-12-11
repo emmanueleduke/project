@@ -9,6 +9,8 @@ class User(BaseModel, Base):
     email = Column('email', String(60), nullable=False, unique=True)
     password = Column('password', String(60), nullable=False)
     creator = Column('creator', Boolean, default=False)
+    session_id = Column('session_id', String(250), nullable=True)
+    reser_token = Column('reser_token', String(250), nullable=True)
 
     def __init__(self, **kwargs):
         """Create the instance"""
