@@ -4,7 +4,8 @@ from models.survey import Survey
 from models.response import Response
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 from config import config
 from os import getenv
 
@@ -14,6 +15,7 @@ DB_PWD = getenv('DB_PWD') or 'iyanu'
 DB_HOST = config.get('db_host') or '0.0.0.0'
 DB_PORT = config.get('db_port') or '3306'
 DB_NAME = config.get('db_name')
+DB_ENV = getenv('ENV') or 'test' 
 
 url = 'mysql+mysqldb://{}:{}@{}/{}'.format(DB_USER,
                                   DB_PWD,
@@ -34,6 +36,9 @@ class Storage:
         """
         self.__engine = create_engine(url)
         Base.metadata.create_all(bind=self.__engine)
+
+        if DB_ENV == 'test' or DB_ENV == 'prod' or DB_ENV == 'production':
+            Base.metadata.drop_all(self.__engine)
 
     def new(self, obj):
         """add the object to the current database session"""
@@ -59,3 +64,22 @@ class Storage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
+    def find_user_by(self, **kwargs):
+        """ FInd user by given attributes """
+        user = self.__session.query(User).filter_by(**kwargs).first()
+        if not user:
+            raise NoResultFound('No user found')
+        return user
+    
+    def update_user(self, user_id, **kwargs):
+        """ update user by given attributes """
+        try:
+            user = self.find_user_by(id=user_id)
+            for k, v in kwargs.items():
+                if hasattr(user, k):
+                    setattr(user, k, v)
+                else:
+                    raise InvalidRequestError
+            self.save()
+        except (ValueError, InvalidRequestError, NoResultFound):
+            raise ValueError
