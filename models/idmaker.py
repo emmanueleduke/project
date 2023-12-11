@@ -39,5 +39,3 @@ def getRID():
     with open(filename, 'w') as wfile:
         json.dump(index, wfile, indent=2)
     return id
-
-print(getRID())
