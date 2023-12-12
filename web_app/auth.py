@@ -14,13 +14,13 @@ def _generate_uuid():
 
 
 class Auth:
-    """Auth class
+    """Auth class for survey app
     """
     def __init__(self):
         """ Initialize db """
         self._db = store
 
-    def register_user(self, email, password, creator):
+    def register_user(self, email, password, creator=False):
         """Register a new user based on given attributes.
 
         Args:
@@ -47,7 +47,8 @@ class Auth:
         """
         try:
             user = self._db.find_user_by(email=email)
-            validate = checkpw(password.encode(), user.password)
+            hashed_password = user.password
+            validate = checkpw(password.encode(), hashed_password.encode())
             return validate
         except NoResultFound:
             return False
