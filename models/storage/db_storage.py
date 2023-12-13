@@ -15,7 +15,7 @@ DB_PWD = getenv('DB_PWD') or 'iyanu'
 DB_HOST = config.get('db_host') or '0.0.0.0'
 DB_PORT = config.get('db_port') or '3306'
 DB_NAME = config.get('db_name')
-DB_ENV = getenv('ENV') or 'test' 
+DB_ENV = getenv('ENV')
 
 url = 'mysql+mysqldb://{}:{}@{}/{}'.format(DB_USER,
                                   DB_PWD,
@@ -70,6 +70,13 @@ class Storage:
         if not user:
             raise NoResultFound('No user found')
         return user
+    
+    def find_survey_id(self, **kwargs):
+        """ Find survey by given id """
+        survey = self.__session.query(Survey).filter_by(**kwargs).first()
+        if not survey:
+            raise NoResultFound('No survey found')
+        return survey
     
     def update_user(self, user_id, **kwargs):
         """ update user by given attributes """
