@@ -10,8 +10,26 @@
 </head>
 <body>
     <h1>Survey Page</h1>
-
-    {% for survey in surveys %}
+    <h3>{{ survey.title }}</h3>
+    <p>{{survey.description}}</p>
+    <form method="post" action="/response">
+        {% for question in survey_form %}
+        <fieldset>
+            <legend>{{ question.question }}</legend>
+            {% for choice in question.choices %}
+                <label>
+                    <input type="radio" name="question_{{ question.question }}" value="{{ choice }}">
+                    {{ choice }}
+                </label><br>
+            {% endfor %}
+        </fieldset>
+        {% endfor %}
+        <button type="submit">Submit Survey</button>
+    </form>
+</body>
+</html>
+<!-- 
+{% for survey in surveys %}
         <div>
             <h2>{{ survey.title }}</h2>
             <p>{{ survey.description }}</p>
@@ -31,8 +49,4 @@
                 {% endfor %}
             </fieldset>
         {% endfor %}
-        <button type="submit">Submit Survey</button>
-    </form>
-</body>
-</html>
-
+        <button type="submit">Submit Survey</button> -->
