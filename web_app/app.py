@@ -1,23 +1,60 @@
 from flask import Flask, render_template, request, redirect, url_for, abort, make_response, session
+import json
 from models import store
 from models.user import User
 from models.survey import Survey
 from models.response import Response
 from web_app.auth import Auth
+from sqlalchemy.orm.exc import NoResultFound
 
 
 auth = Auth()
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET"], strict_slashes=False)
+def check_session():
+    session_id = request.cookies.get('session_id')
+    user = auth.get_user_from_session(session_id)
+    if user:
+        return True
+    return False
+
+
+@app.route("/", methods=["GET", "POST"], strict_slashes=False)
 def index():
     session_id = request.cookies.get('session_id')
     user = auth.get_user_from_session(session_id)
     if user:
-        return "Hello World"
+        return render_template('index.html', user=user)
     else:
         return redirect(url_for("login"))
+    
+
+@app.route('/survey', methods=['GET', 'POST'], strict_slashes=False)
+def survey():
+    if check_session() == False:
+        return redirect(url_for("login"))
+    if request.method == 'POST':
+        survey_link = request.form.get('survey-link')
+        if len(survey_link) > 8:
+            survey_id = survey_link.split('/')[-1]
+        else:
+            survey_id = survey_link
+        try:
+            survey = store.find_survey_id(id=survey_id)
+            survey_form = json.loads(survey.form)
+            return render_template('survey.html', survey=survey, survey_form=survey_form)
+        except NoResultFound:
+            return redirect('/')
+    if request.method == 'GET':
+        survey_id = request.args.get('id')
+        survey = store.find_survey_id(id=survey_id)
+        survey_form = json.loads(survey.form)
+        return render_template('survey.html', survey=survey, survey_form=survey_form)
+    
+@app.route('/response', methods=['POST'], strict_slashes=False)
+def response():
+    
 
 
 @app.route("/login", methods=["POST", "GET"], strict_slashes=False)
@@ -26,19 +63,13 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
         validate = auth.valid_login(email, password)
-        # validate = False
-        print('I am at post', email, password)
         if validate:
-            print('I am at validate', email)
             session_id = auth.create_session(email)
-            response = make_response(render_template("index.html"))
+            response = make_response(redirect("/"))
             response.set_cookie('session_id', session_id)
-            # session['user'] = auth.get_user_from_session(session_id)
             return response
-        print('I am at not at validate', email)
         return render_template("login.html")
     else:
-        print('I am at get')
         session_id = request.cookies.get('session_id')
         user = auth.get_user_from_session(session_id)
         if user:
@@ -47,6 +78,15 @@ def login():
             return render_template('login.html')
 
 
+@app.route('/logout', methods=['DELETE', 'GET'], strict_slashes=True)
+def logout():
+    session_id = request.cookies.get('session_id')
+    user = auth.get_user_from_session(session_id)
+    if not user:
+        return redirect('/login')
+    else:
+        auth.destroy_session(user.id)
+        return redirect('/')
 
 if __name__ == '__main__':
     port = 5000
