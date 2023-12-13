@@ -1,5 +1,5 @@
 import models
-from hashlib import md5
+from bcrypt import hashpw, gensalt
 from models.base import Base, BaseModel
 from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
@@ -16,7 +16,3 @@ class User(BaseModel, Base):
         """Create the instance"""
         super().__init__(**kwargs)
 
-    def __setattr__(self, __name, __value):
-        if __name == "password":
-            __value = md5(__value.encode()).hexdigest()
-        super().__setattr__(__name, __value)
