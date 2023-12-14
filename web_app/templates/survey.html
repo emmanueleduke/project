@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey Page</title>
-    <style>
-        /* Add your CSS styling here */
-    </style>
-</head>
+{% extends "base.html" %}
+{% block title %}Survey {{survey.title}} {% endblock %}
+{% block content %}
 <body>
     <h1>Survey Page</h1>
     <h3>{{ survey.title }}</h3>
     <p>{{survey.description}}</p>
-    <form method="post" action="/response">
+    <form method="post" action="/response/{{survey.id}}">
         {% for question in survey_form %}
         <fieldset>
             <legend>{{ question.question }}</legend>
             {% for choice in question.choices %}
                 <label>
-                    <input type="radio" name="question_{{ question.question }}" value="{{ choice }}">
+                    <input type="radio" name="{{ question.question }}" value="{{ choice }}">
                     {{ choice }}
                 </label><br>
             {% endfor %}
@@ -27,7 +20,7 @@
         <button type="submit">Submit Survey</button>
     </form>
 </body>
-</html>
+{% endblock %}
 <!-- 
 {% for survey in surveys %}
         <div>
