@@ -1,12 +1,6 @@
-<!-- templates/login.html -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
+{% extends "base.html" %}
+{% block title %}Log In{% endblock %}
+{% block content %}
 <body>
     Log In
     <form action="/login" method="post">
@@ -15,8 +9,7 @@
             <input id="inPass" type="password" name="password" placeholder="Password" required>
         </div><br>
         <input type="submit" value="Login">
-        <p id="signup">Don't have an account? <a href="{{ url_for('index') }}">Create one</a></p>
+        <p id="signup">Don't have an account? <a href="{{ url_for('signup') }}">Create one</a></p>
     </form>
 </body>
-</html>
-
+{% endblock %}
