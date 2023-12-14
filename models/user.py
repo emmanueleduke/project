@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship
 
 class User(BaseModel, Base):
     __tablename__ = 'users'
+    first_name = Column('first_name', String(60), nullable=False)
+    last_name = Column('last_name', String(60), nullable=False)
     email = Column('email', String(60), nullable=False, unique=True)
     password = Column('password', String(60), nullable=False)
     creator = Column('creator', Boolean, default=False)
