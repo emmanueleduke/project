@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Create Survey{% endblock %}
+{% block content %}
+<body>
+    <h1>Create Questioniare</h1>
+    <form action="/create_survey" method="post">
+        <input type="text" name="title" id="survey-title" placeholder="Survey Title"><br><br>
+        <input type="text" name="description" id="survey-description" placeholder="Enter description less than 240 words"><br><br>
+        <label>Question</label><br>
+        <input type="text" name="question1" id="survey-question" placeholder="Question"><br><br>
+        <input type="button" value="Add Input box"><br>
+        <input type="button" value="Add options"><br><br>
+        <input type="submit" value="Create">
+    </form>
+</body>
+{% endblock %}
