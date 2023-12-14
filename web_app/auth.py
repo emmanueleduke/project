@@ -20,7 +20,7 @@ class Auth:
         """ Initialize db """
         self._db = store
 
-    def register_user(self, email, password, creator=False):
+    def register_user(self, first_name, last_name, email, password, creator=False):
         """Register a new user based on given attributes.
 
         Args:
@@ -34,7 +34,11 @@ class Auth:
                 raise ValueError("User already exists")
         except NoResultFound:
             hashdpw = _hash_password(password)
-            user = User(email=email, password=hashdpw, creator=creator)
+            user = User(first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        password=hashdpw,
+                        creator=creator)
             user.save()
             return user
     
