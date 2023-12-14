@@ -1,18 +1,13 @@
-<!-- templates/index.html -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey App</title>
-</head>
+{% extends "base.html" %}
+{% block title %}Survey Home{% endblock %}
+{% block content %}
 <body>
-    <h1>Welcome to the Survey App, {{user.id}}</h1>
+    <h1>Welcome to the Survey App, {{user.first_name}}</h1>
     <form action="/survey" method="post">
         <label>Visit Survey</label>
         <input type="text" name="survey-link" id="survey-link" placeholder="survey ID or link">
         <input type="submit" value="Go">
     </form>
+    <button type="button" id="create-survey" name="create-survey"><a href="{{ url_for('create_survey')}}">Create Survey</a></button>
 </body>
-</html>
+{% endblock %}
