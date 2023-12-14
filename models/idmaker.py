@@ -9,33 +9,33 @@ with open(filename, 'r') as f:
 
 
 def getUID():
-    intId = index.get('UD') + 1
+    intId = index.get('UID') + 1
     strId = str(intId).zfill(6)
-    id = 'UD{}'.format(strId)
+    id = 'UID{}'.format(strId)
 
-    index['UD'] = intId
+    index['UID'] = intId
     with open(filename, 'w') as wfile:
         json.dump(index, wfile, indent=2)
     return id
 
 
 def getSID():
-    intId = index.get('SD') + 1
+    intId = index.get('SID') + 1
     strId = str(intId).zfill(6)
-    id = 'SD{}'.format(strId)
+    id = 'SID{}'.format(strId)
 
-    index['SD'] = intId
+    index['SID'] = intId
     with open(filename, 'w') as wfile:
         json.dump(index, wfile, indent=2)
     return id
 
 
 def getRID():
-    intId = index.get('RD') + 1
+    intId = index.get('RID') + 1
     strId = str(intId).zfill(6)
-    id = 'RD{}'.format(strId)
+    id = 'RID{}'.format(strId)
 
-    index['RD'] = intId
+    index['RID'] = intId
     with open(filename, 'w') as wfile:
         json.dump(index, wfile, indent=2)
     return id
