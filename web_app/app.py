@@ -94,7 +94,7 @@ def create_survey():
     if not user.creator:
         return redirect('/')
     if request.method == 'GET':
-        return "create survey form"
+        return render_template('create_survey.html')
     if request.method == 'POST':
         pass
 
