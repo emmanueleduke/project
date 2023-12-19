@@ -1,0 +1,134 @@
+.index {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+/*
+    index_banner
+*/
+.index_banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+    flex-direction: column;
+    color: #fff;
+    font-weight: bold;
+    background-color: #5cdb95;
+}
+
+.text-container {
+    max-width: 600px;
+}
+  
+.index_banner h1,
+.index_banner .para {
+    margin-bottom: 8px;
+}
+
+.index_banner h1 {
+    font-weight: bolder;
+}
+
+.index_banner form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    width: 70vw;
+    left: 14.5%;
+    margin: 10px auto;
+}
+
+.index_banner input[type="submit"] {
+    width: 8vw;
+    height: 42px;
+    padding: 10px 10px;
+    margin: 0px 3px;
+    background-color: #05396b;
+    border: #05396b;
+    border-radius: 5px;
+    color: #A3E7D9;
+}
+
+.index_banner input[type="submit"]:hover {
+    background-color: #053a6ba7;
+    color: #A3E7D9;
+}
+
+.index_banner input[type="text"] {
+    width: 30vw;
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+
+.index_banner img {
+    position: absolute;
+    top: 70px;
+    left: -80px;
+    opacity: 0.2;
+}
+
+
+/*
+    .index_create
+*/
+.index_create {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 80vh;
+}
+
+.index_create .div_left {
+    width: 50vw;
+    /* background-color: #389583; */
+    padding: 30vh 5vw;
+    color: #05396b;
+}
+
+.index_create .div_left p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.index_create .div_left button {
+    position: relative;
+    left: 80px;
+    height: 45px;
+    width: 25vw;
+    border: 0px;
+    border-radius: 5px;
+    background-color: #389583;
+    transition: transform 0.2s ease-in-out;
+}
+
+.index_create .div_left button:hover {
+    background-color: #389582cc;
+    transform: scale(1.112);
+
+}
+
+.div_left button a {
+    text-decoration: none;
+    color: #edf5e1;
+}
+
+.index_create .div_right {
+    overflow: hidden;
+}
+
+.index_create .div_right img{
+    width: 50vw;
+    height: 80vh;
+    opacity: 0.8;
+    transition: transform 0.5s ease-in-out;
+}
+
+.index_create .div_right img:hover {
+    transform: scale(1.12);
+}
