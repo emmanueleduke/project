@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Log In{% endblock %}
 {% block content %}
-<body>
-    Log In
-    <form action="/login" method="post">
-        <input type="email" name="email" placeholder="exprecn@something.com" required><br><br>
-        <div class="pass">
-            <input id="inPass" type="password" name="password" placeholder="Password" required>
-        </div><br>
-        <input type="submit" value="Login">
-        <p id="signup">Don't have an account? <a href="{{ url_for('signup') }}">Create one</a></p>
-    </form>
-</body>
+<div class="login">
+    <h3><b>Log In</b></h3>
+    <img id="baseicon1" src="{{ url_for('static', filename='images/survey.svg') }}">
+    <article class="login_body">
+        <form action="/login" method="post">
+            <input type="email" name="email" placeholder="exprecn@something.com" required><br><br>
+            <div class="pass">
+                <input id="inPass" type="password" name="password" placeholder="Password" required>
+            </div><br>
+            <input type="submit" value="Login">
+            <p id="signup">Don't have an account? <a href="{{ url_for('signup') }}">Create one</a></p>
+        </form>
+    </article>
+</div>
 {% endblock %}

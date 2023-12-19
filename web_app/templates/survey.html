@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Survey {{survey.title}} {% endblock %}
 {% block content %}
-<body>
+<div class="survey">
     <h1>Survey Page</h1>
     <h3>{{ survey.title }}</h3>
     <p>{{survey.description}}</p>
@@ -10,36 +10,20 @@
         <fieldset>
             <legend>{{ question.question }}</legend>
             {% for choice in question.choices %}
-                <label>
+                {% if choice|length > 1 %}
+                    <label>
                     <input type="radio" name="{{ question.question }}" value="{{ choice }}">
-                    {{ choice }}
-                </label><br>
+                        {{ choice }}
+                    </label><br>
+                {% else %}
+                    <label>
+                    <input type="text" name="{{question.question}}" placeholder="Enter text">
+                    </label>
+                {% endif %}
             {% endfor %}
         </fieldset>
         {% endfor %}
         <button type="submit">Submit Survey</button>
     </form>
-</body>
+</div>
 {% endblock %}
-<!-- 
-{% for survey in surveys %}
-        <div>
-            <h2>{{ survey.title }}</h2>
-            <p>{{ survey.description }}</p>
-        </div>
-    {% endfor %}
-
-    <h2>Survey or Quiz Questions</h2>
-    <form method="post" action="{{ url_for('survey') }}">
-        {% for question in questions %}
-            <fieldset>
-                <legend>{{ question.question }}</legend>
-                {% for choice in question.choices %}
-                    <label>
-                        <input type="radio" name="question_{{ question.question }}" value="{{ choice }}">
-                        {{ choice }}
-                    </label><br>
-                {% endfor %}
-            </fieldset>
-        {% endfor %}
-        <button type="submit">Submit Survey</button> -->
