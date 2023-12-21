@@ -100,7 +100,7 @@ def response(sId):
         }
     res = Response(**response_data)
     res.save()
-    return render_template('thank_you.html')
+    return render_template('thank_you.html', user=user)
 
 
 @app.route('/create_survey', methods=['GET','POST'], strict_slashes=False)
@@ -112,7 +112,7 @@ def create_survey():
     if not user.creator:
         return redirect('/')
     if request.method == 'GET':
-        return render_template('create_survey.html')
+        return render_template('create_survey.html', user=user)
     if request.method == 'POST':
         form = request.form
         title = form['title']
@@ -120,9 +120,12 @@ def create_survey():
         
         forms = []
         count = 1
+        print(form)
         for k, v in form.items():
             if k.startswith(f'Question-{count}'):
                 count += 1
+                v = v.replace('\r\n', ', ')
+                print(v)
                 match = re.match(r'question: (.+), choices: (.+)', v)
 
                 if match:
@@ -131,6 +134,8 @@ def create_survey():
                     print(choices_str, type(choices_str))
                     try:
                         choices_list = ast.literal_eval(choices_str)
+                        if choices_list is None:
+                            choices_list = []
                     except Exception as e:
                         choices_list = []
                     to_dict = {'question': question, 'choices': choices_list}
@@ -145,7 +150,15 @@ def create_survey():
         return f'Link to survey: http://0.0.0.0:5000/survey/{new_survey.id}'
 
 
-@app.route('/about', methods=['GET'], )
+@app.route('/about', methods=['GET'], strict_slashes=False)
+def about():
+    return render_template('about.html')
+
+
+@app.route('/thank_you', methods=['GET'], strict_slashes=False)
+def thanks():
+    user = user_data()
+    return render_template('thank_you.html', user=user)
 
 
 @app.route("/login", methods=["POST", "GET"], strict_slashes=False)
