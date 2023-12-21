@@ -1,8 +1,11 @@
 .header {
+    position: sticky;
+    top: 0;
     background-color: #5cdb95;
     color: #fff;
     font-weight: bold;
     padding: 10px 20px;
+    z-index: 1;
 }
 
 .header a {
