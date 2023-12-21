@@ -2,17 +2,31 @@
 {% block title %}Create Survey{% endblock %}
 {% block content %}
 <div class="create-survey">
-    <h1>Create Questioniare</h1>
-    <form action="/create_survey" method="post" class="create-form">
-        <input type="text" name="title" id="survey-title" placeholder="Survey Title"><br><br>
-        <input type="text" name="description" id="survey-description" placeholder="Enter description less than 240 words"><br><br>
-        <div class="questions">
-
+    <div class="banner">
+        <div class="banner_left">
+            <h1>Click to create Survey</h1>
         </div>
-    
-        <input type="button" id="add-questions" value="Add Questions"><br><br>
+        <div class="banner_right">
+            <h2>How to?</h2>
+        </div>
+    </div>
+
+    <div class="survey_container">
+        <form action="/create_survey" method="post" class="create-form">
+            <div class="title_desc2">
+                <label class="survey_title">Survey Title</label>
+                <input type="text" name="title" id="survey-title" placeholder="Survey Title less than 60 characters">
+                <label class="survey_desc">Description</label>
+                <textarea name="description" id="survey-description" rows="4" cols="50" placeholder="Enter description less than 240 characters"></textarea>
+            </div>
         
-        <input type="submit" value="Create">
-    </form>
+            <input type="button" id="add-questions" value="+">
+            <input type="button" id="remove-questions" value="-">
+            
+            <input type="submit" value="Create"><br><br>
+        </form>
+
+        <!-- <input type="button" id="show_how" value="Show how"> -->
+    </div>
 </div>
 {% endblock %}
