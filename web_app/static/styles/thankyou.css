@@ -77,6 +77,7 @@
 
 .thank_you_content .div_right button {
     left: 120px;
+    background-color: #05386b;
 }
 
 .thank_you_content .div_left button:hover, 
@@ -90,4 +91,43 @@
 .div_right button a{
     text-decoration: none;
     color: #edf5e1;
+}
+
+
+
+/*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*/
+
+.generate_link {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.generate_link_banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    background-color: #05386b;
+    color: #fff;
+}
+
+.generate_link_banner p {
+    background-color: #3f5263;
+    border: 1px solid #3f5263;
+    border-radius: 5px;
+    height: 30px;
+    padding: 10px 80px 10px 10px;
 }
