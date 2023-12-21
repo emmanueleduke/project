@@ -145,14 +145,20 @@ def create_survey():
                             title=title,
                             description=desc,
                             form=json.dumps(forms))
-        new_survey.save()
-
-        return f'Link to survey: http://0.0.0.0:5000/survey/{new_survey.id}'
+        # new_survey.save()
+        return render_template('generate_link.html',
+                               id=new_survey.id,
+                               link=f'http://0.0.0.0:5000/survey/{new_survey.id}')
+        # return f'Link to survey: http://0.0.0.0:5000/survey/{new_survey.id}'
 
 
 @app.route('/about', methods=['GET'], strict_slashes=False)
 def about():
-    return render_template('about.html')
+    user = user_data()
+    if user:
+        return render_template('about.html', user=user)
+    else:
+        return render_template('about.html')
 
 
 @app.route('/thank_you', methods=['GET'], strict_slashes=False)
