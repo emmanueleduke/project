@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<div class="signup">
+    <h3><b>Sign Up</b></h3>
+    <img id="baseicon1" src="{{ url_for('static', filename='images/survey.svg') }}">
+    <article class="signup_body">
+        <form action="/signup" method="post">
+            <input type="text" name="first-name" placeholder="First name" required><br>
+            <input type="text" name="last-name" placeholder="Last name" required><br>
+            <input type="email" name="email" placeholder="email address" required><br>
+            <div class="pass">
+                <input id="inPass" type="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="pass">
+                <input id="inPass" type="password" name="confirm-password" placeholder="Confirm password" required>
+            </div><br>
+
+            <label class="custom-radio">
+                <input type="radio" id="creator-false" name="creator" value="">
+                <span class="radio-dot"></span>
+                No, I do not want to create a survey.
+            </label>
+            <br><br>
+            <label class="custom-radio">
+                <input type="radio" id="creator-true" name="creator" value="True">
+                <span class="radio-dot"></span>
+                Yes, I want to create a survey.
+            </label>
+            <br><br>
+            <input type="submit" value="Login">
+            <p id="signup">Already have an account? <a href="{{ url_for('login') }}">Sign In</a></p>
+        </form>
+    </article>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,182 @@
+.signup,
+.login {
+    display: block;
+    margin: auto;
+    color: rgb(255, 255, 255);
+    background-color: #5cdb95;
+}
+
+#baseicon1 {
+    position: absolute;
+    left: 65%;
+    top: 20%;
+    width: 390px;
+    height: 420px;
+    opacity: 0.7;
+    transform: rotate(30deg);
+}
+
+
+
+/* 
+ *
+ * Sign up. Sign up page.
+ *
+ */
+.signup_body {
+    display: flex;
+    width: 50%;
+    position: relative;
+    left: 25%;
+    /* margin: auto 25%; */
+    flex-direction: column;
+    border-radius: 3%;
+}
+
+.signup h3 {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    font-size: 45px;
+    font-weight: bolder;
+    color: #05396b;
+}
+
+.signup_body form{
+    align-self: center;
+    margin: 60px auto;
+}
+
+.signup_body form input[type="email"],
+.signup_body form input[type="text"],
+.signup_body form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 4px auto;
+    border: 2px solid #fff;
+    border-radius: 7px;
+}
+
+.signup_body form input[type="email"]:hover,
+.signup_body form input[type="text"]:hover,
+.signup_body form input[type="password"]:hover{
+    border: 2px solid #389583;
+}
+
+.signup_body form input[type="email"]:focus,
+.signup_body form input[type="text"]:focus,
+.signup_body form input[type="password"]:focus{
+    border: 2px solid #05396b;
+    outline: none;
+}
+
+
+/*
+ *
+ * Log in. Login page
+ *
+ */
+
+.login {
+    padding: 50px;
+}
+
+ .login_body {
+    display: flex;
+    width: 50%;
+    height: 80%;
+    margin: auto 25%;
+    padding: 50px 0px;
+    flex-direction: column;
+    border-radius: 3%;
+}
+
+.login h3 {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    font-size: 45px;
+    font-weight: bolder;
+    color: #05396b;
+}
+
+.login_body form{
+    align-self: center;
+    margin: 30px auto;
+}
+
+.login_body form input[type="email"],
+.login_body form input[type="text"],
+.login_body form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 7px;
+}
+
+.login_body form input[type="email"]:hover,
+.login_body form input[type="text"]:hover,
+.login_body form input[type="password"]:hover{
+    border: 2px solid #389583;
+}
+
+.login_body form input[type="email"]:focus,
+.login_body form input[type="text"]:focus,
+.login_body form input[type="password"]:focus{
+    border: 2px solid #05396b;
+    outline: none;
+}
+
+
+
+
+/* Others */
+/* Hide the default radio button */
+input[type="radio"] {
+    display: none;
+    z-index: 1;
+  }
+  
+/* Style the custom radio button container */
+.custom-radio {
+display: inline-block;
+position: relative;
+padding-left: 30px; /* Adjust as needed */
+cursor: pointer;
+color: #05396b;
+}
+
+/* Style the custom radio button */
+.custom-radio .radio-dot {
+position: absolute;
+top: 50%;
+left: 0;
+transform: translateY(-50%);
+width: 15px;
+height: 15px;
+border: 2px solid #05396b; /* Change color as needed */
+border-radius: 50%;
+background-color: #fff;
+}
+
+input[type="radio"]:checked + .radio-dot {
+    background-color: #05246b9c; /* Change color as needed */
+}
+
+
+.login_body input[type="submit"],
+.signup_body input[type="submit"] {
+    width: 100%;
+    padding: 10px 10px;
+    margin: 0px 10px;
+    background-color: #05396b;
+    border: #05396b;
+    border-radius: 5px;
+    color: #A3E7D9;
+}
+
+.login_body input[type="submit"]:hover ,
+.signup_body input[type="submit"]:hover {
+    background-color: #053a6ba7;
+    color: #A3E7D9;
+}
